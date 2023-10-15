@@ -1,6 +1,6 @@
 import { useState } from "react";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
-import styles from "./List.module.scss";
+import styles from "./common.module.scss";
 import { useSearchParams } from "react-router-dom";
 const List = () => {
   const [questionList, setQuestionList] = useState([
@@ -36,13 +36,15 @@ const List = () => {
       </div>
 
       <div className={styles.content}>
-        {questionList.map((qes) => {
-          const { _id } = qes;
-          return <QuestionCard key={_id} {...qes} />;
-        })}
+        {/* 问卷列表 */}
+        {questionList.length > 0 &&
+          questionList.map((qes) => {
+            const { _id } = qes;
+            return <QuestionCard key={_id} {...qes} />;
+          })}
       </div>
 
-      <div className={styles.footer}>list page footer</div>
+      <div className={styles.footer}>loadMore...上划加载更多</div>
     </>
   );
 };

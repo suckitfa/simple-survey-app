@@ -1,5 +1,15 @@
 import { FC } from "react";
 import styles from "./Question.module.scss";
+import { Button, Divider, Space } from "antd";
+import {
+  CopyOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  LineChartOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+
 type PropsType = {
   _id: string;
   title: string;
@@ -10,7 +20,9 @@ type PropsType = {
 };
 
 const QuestionCard: FC<PropsType> = (props: PropsType) => {
-  const { _id, title, createdAt, answerCount, isPublished } = props;
+  const { _id, title, createdAt, answerCount, isStar, isPublished } = props;
+
+  const nav = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -28,15 +40,48 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
           <span>{createdAt}</span>
         </div>
       </div>
-      <div className={styles['button-container']}>
+      <Divider />
+      {/* 下部分 */}
+      <div className={styles["button-container"]}>
         <div className={styles.left}>
-          <button>编辑问卷</button>
-          <button>数据统计</button>
+          <Space>
+            <Button
+              icon={<EditOutlined />}
+              type="text"
+              size="small"
+              onClick={() => nav(`/question/edit/${_id}`)}
+              disabled={isPublished}
+            >
+              编辑问卷
+            </Button>
+            <Button
+              onClick={() => nav(`/question/stat/${_id}`)}
+              icon={<LineChartOutlined />}
+              type="text"
+              size="small"
+              disabled={!isPublished}
+            >
+              数据统计
+            </Button>
+          </Space>
         </div>
         <div className={styles.right}>
-          <button>标星</button>
-          <button>复制</button>
-          <button>删除</button>
+          <Space>
+            <Button
+              onClick={() => nav(`/question/star/${_id}`)}
+              icon={<StarOutlined />}
+              type="text"
+              size="small"
+            >
+              {isStar ? "取消星标" : "标星"}
+            </Button>
+            <Button icon={<CopyOutlined />} type="text" size="small">
+              复制
+            </Button>
+            <Button type="text" size="small" icon={<DeleteOutlined />}>
+              删除
+            </Button>
+          </Space>
         </div>
       </div>
     </div>
