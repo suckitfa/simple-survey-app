@@ -1,5 +1,5 @@
 const Star = () => {
-    return <p>not found</p>
+    return <p>star</p>
 }
 
 export default Star

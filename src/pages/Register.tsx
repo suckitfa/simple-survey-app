@@ -1,5 +1,5 @@
 const Register = () => {
-    return <p>Login</p>
-}
+  return <p>Register</p>;
+};
 
-export default Register
+export default Register;

@@ -1,13 +1,7 @@
-import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-import List from './pages/manage/List';
+import routerConfig from "./router";
+import { RouterProvider } from "react-router";
 function App() {
-  return (
-    <div className="App">
-      <List />
-    </div>
-  );
+  return <RouterProvider router={routerConfig}></RouterProvider>;
 }
 
 export default App;
