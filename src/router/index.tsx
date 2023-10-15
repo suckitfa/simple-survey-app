@@ -72,3 +72,8 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+// ----- 分割线 -----
+export const HOME_PATH = "/";
+export const LOGIN_PATHNAME = "/login";
+export const REGISTER_PATHNAME = "/register";
+export const MANAGE_INDEX_PATHNAME = "/manage/list";
