@@ -1,12 +1,19 @@
 import { Input } from "antd";
-import { ChangeEvent, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { LIST_SEARCH_PAEAM_KEY } from "../constant/index";
 const { Search } = Input;
 const ListSearch = () => {
   const [val, setVal] = useState("");
   const nav = useNavigate();
   const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+
+  // 同步URL的参数到state
+  useEffect(() => {
+    const curVal = searchParams.get(LIST_SEARCH_PAEAM_KEY) || "";
+    setVal(curVal);
+  }, [searchParams]);
 
   const handleSearch = (val: string) => {
     // 跳转页面，增加URL参数
