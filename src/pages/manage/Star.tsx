@@ -3,11 +3,13 @@ import { data } from "./data";
 import styles from "./common.module.scss";
 import { Empty, Typography } from "antd";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
+import { useTitle } from "ahooks";
 
 const { Title } = Typography;
 
 const Star = () => {
   const [questionList, setQuestionList] = useState(data);
+  useTitle("小慕问卷-星标问卷");
   return (
     <>
       <div className={styles.header}>
