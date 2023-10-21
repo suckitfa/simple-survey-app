@@ -14,7 +14,7 @@ instance.interceptors.response.use((res) => {
     if (msg) {
       message.error(msg);
     }
-    throw new Error(msg)
+    // throw new Error(msg);
   }
   return data as any;
 });
