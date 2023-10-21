@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.scss";
 import { Button, Typography } from "antd";
 import { MANAGE_INDEX_PATHNAME } from "../constant/index";
-// import { useEffect } from "react";
-// import axios from "axios";
+import { useEffect } from "react";
+import axios from "axios";
 // import "../_mock/index";
 
 const { Paragraph, Title } = Typography;
@@ -11,13 +11,11 @@ const Home = () => {
   const nav = useNavigate();
 
   // 在开发环境下会会执行两次
-  // useEffect(() => {
-  //   axios.get("/api/test").then((resp) => console.log("resp = ", resp.data));
-
-  //   // fetch("/test/api")
-  //   //   .then((resp) => resp.json())
-  //   //   .then(console.log);
-  // }, []);
+  useEffect(() => {
+    fetch("/api/test")
+      .then((resp) => resp.json())
+      .then(console.log);
+  }, []);
   return (
     <>
       <div className={styles.container}>
