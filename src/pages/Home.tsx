@@ -1,21 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import styles from "./Home.module.scss";
+import { Button, Typography } from "antd";
+import { MANAGE_INDEX_PATHNAME } from "../constant/index";
+const { Paragraph, Title } = Typography;
 const Home = () => {
   const nav = useNavigate();
-  // 第三方hook
-  const clickHanlder = () => {
-    // nav("/login");
-    nav({
-      pathname: "/login",
-      search: "b=21",
-    });
-  };
   return (
     <>
-      <p>Home</p>
-      <div>
-        <button onClick={clickHanlder}>Login</button>
-        <Button type="primary">蚂蚁</Button>
+      <div className={styles.container}>
+        <div className={styles.info}>
+          <Title>问卷调查 | 在线投票</Title>
+          <Paragraph>
+            已累计创建问卷 100 份，发布问卷 90 份，收到答卷 980 份
+          </Paragraph>
+        </div>
+        <Button
+          className={styles.btn}
+          type="primary"
+          onClick={() => nav(MANAGE_INDEX_PATHNAME)}
+        >
+          开始使用
+        </Button>
       </div>
     </>
   );

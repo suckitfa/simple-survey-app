@@ -1,0 +1,19 @@
+.container {
+    height: calc(100vh - 65px - 65px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // 这一行代码属实装到位了
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+
+    .info {
+        text-align: center;
+
+        .btn {
+            height: 60px;
+            font-size: 24px;
+        }
+    }
+
+}
