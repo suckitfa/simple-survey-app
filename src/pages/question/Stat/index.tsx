@@ -1,5 +1,13 @@
-const Stat = () => {
-    return  <p>stat</p>
-}
+import useLoadQuestionData from "../../../hooks/useLoadQuestionData";
 
-export default Stat
+const Stat = () => {
+  const { loading, questionData } = useLoadQuestionData();
+  return (
+    <>
+      <h1>Stat Page</h1>
+      {loading ? <p>Loading</p> : <p>{JSON.stringify(questionData)}</p>}
+    </>
+  );
+};
+
+export default Stat;
