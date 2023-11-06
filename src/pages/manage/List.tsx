@@ -2,13 +2,12 @@ import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import styles from "./common.module.scss";
 import { useSearchParams } from "react-router-dom";
 import { Typography, Spin } from "antd";
-import { useRequest, useTitle } from "ahooks";
+import { useTitle } from "ahooks";
 import ListSearch from "../../components/ListSearch";
-import { getQuestionListService } from "../../service/question";
-import { ResDataType } from "../../service/axios";
+import useLoadQuestionData from "../../hooks/useLoadQuestionData";
 const { Title } = Typography;
 const List = () => {
-  const { data = {}, loading } = useRequest(getQuestionListService);
+  const { data = {}, loading } = useLoadQuestionData();
   const { list = [], total = 0 } = data;
 
   // 获取参数 react-router
