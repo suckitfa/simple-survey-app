@@ -9,22 +9,28 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { createQuestionService } from "../service/question";
-import { useState } from "react";
+import { useRequest } from "ahooks";
 const ManageLayout = () => {
   const nav = useNavigate();
   const { pathname } = useLocation();
   console.log("pathname = ", pathname);
 
-  const [loading, setLoading] = useState(false);
-  const handleAdd = async () => {
-    setLoading(true);
-    const data = await createQuestionService();
-    const { id } = data;
-    if (id) {
-      nav(`/question/edit/${id}`);
-      message.success("创建成功！");
-    }
-    setLoading(false);
+  // const [loading, setLoading] = useState(false);
+  // const handleAdd = async () => {
+  //   setLoading(true);
+  //   const data = await createQuestionService();
+  //   const { id } = data;
+  //   if (id) {
+  //     nav(`/question/edit/${id}`);
+  //     message.success("创建成功！");
+  //   }
+  //   setLoading(false);
+  // };
+  const { loading, error, run } = useRequest(createQuestionService, {
+    manual: true,
+  });
+  const handleAdd = () => {
+    run();
   };
   return (
     <div className={styles.container}>
