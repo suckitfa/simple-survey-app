@@ -1,46 +1,15 @@
-import { useState } from "react";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import styles from "./common.module.scss";
 import { useSearchParams } from "react-router-dom";
-import { Typography } from "antd";
-import { useTitle } from "ahooks";
+import { Typography, Spin } from "antd";
+import { useRequest, useTitle } from "ahooks";
 import ListSearch from "../../components/ListSearch";
+import { getQuestionListService } from "../../service/question";
+import { ResDataType } from "../../service/axios";
 const { Title } = Typography;
 const List = () => {
-  const [questionList, setQuestionList] = useState([
-    {
-      _id: "q1",
-      title: "buy coffee",
-      isPublished: false,
-      isStar: true,
-      answerCount: 4,
-      createdAt: "2023-11-23",
-    },
-    {
-      _id: "q2",
-      title: "buy coffee2",
-      isPublished: true,
-      isStar: true,
-      answerCount: 4,
-      createdAt: "2023-11-23",
-    },
-    {
-      _id: "q3",
-      title: "buy coffee",
-      isPublished: false,
-      isStar: true,
-      answerCount: 4,
-      createdAt: "2023-11-23",
-    },
-    {
-      _id: "q4",
-      title: "buy coffee2",
-      isPublished: true,
-      isStar: true,
-      answerCount: 4,
-      createdAt: "2023-11-23",
-    },
-  ]);
+  const { data = {}, loading } = useRequest(getQuestionListService);
+  const { list = [], total = 0 } = data;
 
   // 获取参数 react-router
   const [searchParams] = useSearchParams();
@@ -59,8 +28,17 @@ const List = () => {
 
       <div className={styles.content}>
         {/* 问卷列表 */}
-        {questionList.length > 0 &&
-          questionList.map((qes) => {
+        {loading && (
+          <div
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <Spin />
+          </div>
+        )}
+        {list.length > 0 &&
+          list.map((qes: any) => {
             const { _id } = qes;
             return <QuestionCard key={_id} {...qes} />;
           })}
