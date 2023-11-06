@@ -32,6 +32,10 @@ const ManageLayout = () => {
     run: handleAdd,
   } = useRequest(createQuestionService, {
     manual: true,
+    onSuccess(result) {
+      nav(`/question/edit/${result.id}/`);
+      message.success("创建成功！");
+    },
   });
   return (
     <div className={styles.container}>
