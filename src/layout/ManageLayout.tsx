@@ -26,12 +26,13 @@ const ManageLayout = () => {
   //   }
   //   setLoading(false);
   // };
-  const { loading, error, run } = useRequest(createQuestionService, {
+  const {
+    loading,
+    error,
+    run: handleAdd,
+  } = useRequest(createQuestionService, {
     manual: true,
   });
-  const handleAdd = () => {
-    run();
-  };
   return (
     <div className={styles.container}>
       <div className={styles.left}>
