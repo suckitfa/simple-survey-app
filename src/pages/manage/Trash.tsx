@@ -9,18 +9,24 @@ import {
   Space,
   Modal,
   message,
+  Spin,
 } from "antd";
-import { data } from "./data";
 import styles from "./common.module.scss";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData";
+import ListSearch from "../../components/ListSearch";
+
 const { Title } = Typography;
 
 const { confirm } = Modal;
 // 表格 + 分页
 const Trash = () => {
   useTitle("小慕问卷-回收站");
-  const [questionList, setQuestionList] = useState(data);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const { data = {}, loading } = useLoadQuestionListData({ isDeleted: true });
+  const { list = [], total = 0 } = data;
+
   const columns = [
     {
       title: "ID",
@@ -88,7 +94,7 @@ const Trash = () => {
       <Table
         rowKey={(q) => q._id}
         pagination={false}
-        dataSource={questionList}
+        dataSource={list}
         columns={columns}
         rowSelection={{
           type: "checkbox",
@@ -108,11 +114,19 @@ const Trash = () => {
           <Title level={3}>回收站</Title>
         </div>
         <div className={styles.right}>
-          （搜索）{JSON.stringify(selectedIds)}{" "}
+          <ListSearch />
         </div>
       </div>
       <div className={styles.content}>
-        {!questionList.length ? <Empty description="暂无数据" /> : TableElem}
+        {loading ? (
+          <div style={{ textAlign: "center" }}>
+            <Spin />
+          </div>
+        ) : !list.length ? (
+          <Empty description="暂无数据" />
+        ) : (
+          TableElem
+        )}
       </div>
     </>
   );

@@ -1,18 +1,14 @@
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import styles from "./common.module.scss";
-import { useSearchParams } from "react-router-dom";
-import { Typography, Spin } from "antd";
+import { Typography, Spin, Empty } from "antd";
 import { useTitle } from "ahooks";
 import ListSearch from "../../components/ListSearch";
-import useLoadQuestionData from "../../hooks/useLoadQuestionData";
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData";
 const { Title } = Typography;
 const List = () => {
-  const { data = {}, loading } = useLoadQuestionData();
+  const { data = {}, loading } = useLoadQuestionListData();
   const { list = [], total = 0 } = data;
 
-  // 获取参数 react-router
-  const [searchParams] = useSearchParams();
-  console.log("keyword = ", searchParams.get("keyword"));
   useTitle("小慕问卷-我的问卷");
   return (
     <>
@@ -27,7 +23,7 @@ const List = () => {
 
       <div className={styles.content}>
         {/* 问卷列表 */}
-        {loading && (
+        {loading ? (
           <div
             style={{
               textAlign: "center",
@@ -35,15 +31,19 @@ const List = () => {
           >
             <Spin />
           </div>
-        )}
-        {list.length > 0 &&
+        ) : list.length > 0 ? (
           list.map((qes: any) => {
             const { _id } = qes;
             return <QuestionCard key={_id} {...qes} />;
-          })}
+          })
+        ) : (
+          <Empty />
+        )}
       </div>
 
-      <div className={styles.footer}>loadMore...上划加载更多</div>
+      <div className={styles.footer}>
+        <span className={styles.footerBtn}>loadMore...上划加载更多</span>
+      </div>
     </>
   );
 };
