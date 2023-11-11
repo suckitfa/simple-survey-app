@@ -2,6 +2,8 @@ import axios, { ResDataType, ResType } from "./axios";
 
 type SerachOption = {
   keyword: string;
+  isStar: boolean;
+  isDeleted: boolean;
 };
 
 export async function getQuestionService(id: string): Promise<ResDataType> {
@@ -21,9 +23,8 @@ export async function getQuestionListService(
   queryParams: Partial<SerachOption> = {}
 ): Promise<ResDataType> {
   const url = "/api/question";
-  const data = (await axios.get(url),
-  {
+  const data = (await axios.get(url, {
     params: queryParams,
-  }) as ResDataType;
+  })) as ResDataType;
   return data;
 }
