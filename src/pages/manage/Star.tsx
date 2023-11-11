@@ -1,7 +1,6 @@
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import styles from "./common.module.scss";
-import { useSearchParams } from "react-router-dom";
-import { Typography, Spin } from "antd";
+import { Typography, Spin, Pagination } from "antd";
 import { useTitle } from "ahooks";
 import ListSearch from "../../components/ListSearch";
 import useLoadQuestionListData from "../../hooks/useLoadQuestionListData";
@@ -44,7 +43,13 @@ const List = () => {
           })}
       </div>
 
-      <div className={styles.footer}>loadMore...上划加载更多</div>
+      <div className={styles.footer}>
+        <Pagination
+          defaultCurrent={1}
+          total={total}
+          style={{ background: "#fff" }}
+        />
+      </div>
     </>
   );
 };

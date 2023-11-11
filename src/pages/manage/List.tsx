@@ -4,6 +4,7 @@ import { Typography, Spin, Empty } from "antd";
 import { useTitle } from "ahooks";
 import ListSearch from "../../components/ListSearch";
 import useLoadQuestionListData from "../../hooks/useLoadQuestionListData";
+import ListPage from "../../components/ListPage";
 const { Title } = Typography;
 const List = () => {
   const { data = {}, loading } = useLoadQuestionListData();
@@ -42,7 +43,7 @@ const List = () => {
       </div>
 
       <div className={styles.footer}>
-        <span className={styles.footerBtn}>loadMore...上划加载更多</span>
+        <ListPage total={total} />
       </div>
     </>
   );
