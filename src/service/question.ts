@@ -4,6 +4,8 @@ type SerachOption = {
   keyword: string;
   isStar: boolean;
   isDeleted: boolean;
+  pageNum: number;
+  pageSize: number;
 };
 
 export async function getQuestionService(id: string): Promise<ResDataType> {
@@ -22,6 +24,7 @@ export async function createQuestionService(): Promise<ResDataType> {
 export async function getQuestionListService(
   queryParams: Partial<SerachOption> = {}
 ): Promise<ResDataType> {
+  console.log("queryParams = ", queryParams);
   const url = "/api/question";
   const data = (await axios.get(url, {
     params: queryParams,
